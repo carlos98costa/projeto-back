@@ -1,0 +1,15 @@
+{
+  "name": "projeto-back",
+  "version": "1.0.0",
+  "description": "Backend API para o projeto do segundo bimestre",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "node -e \"console.log('OK')\""
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2"
+  }
+}
