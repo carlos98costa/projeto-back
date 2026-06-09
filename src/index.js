@@ -15,8 +15,27 @@ const allowedOrigins = [
   'http://127.0.0.1:8080',
 ].filter(Boolean);
 
+const allowedOriginPatterns = [
+  /^https:\/\/.*\.vercel\.app$/,
+  /^https:\/\/.*\.app\.github\.dev$/,
+];
+
 const corsOptions = {
-  origin: [...allowedOrigins, /^https:\/\/.*\.app\.github\.dev$/],
+  origin(origin, callback) {
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    const isAllowed =
+      allowedOrigins.includes(origin) ||
+      allowedOriginPatterns.some((pattern) => pattern.test(origin));
+
+    if (isAllowed) {
+      return callback(null, true);
+    }
+
+    return callback(new Error(`Origem CORS não permitida: ${origin}`));
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
