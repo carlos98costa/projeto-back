@@ -1,17 +1,46 @@
 # Projeto Back-End
 
-Backend simples em Node.js para o projeto do segundo bimestre.
+API Node.js/Express do projeto do segundo bimestre.
 
-## Conteúdo
+## O que este repositório entrega na Parte 2
 
-- `src/index.js`: servidor Express com rotas de status e mensagem.
-- `.github/workflows/release.yml`: workflow GitHub Actions acionado por tags SemVer.
-- `media/`: espaço para evidências de deploy.
+- `Dockerfile` para criar a imagem da API.
+- `.dockerignore` para reduzir o contexto de build.
+- `docker-compose.yml` para subir a API localmente no container.
+- Rotas `/` e `/v1` prontas para validação no Codespaces.
+- CORS configurado para consumir o front-end publicado na Vercel e o front local no Codespaces.
+
+## Rotas principais
+
+- `GET /` → retorno em JSON com informações da API.
+- `GET /v1` → retorno em JSON com mensagem e data/hora da chamada.
+
+## Execução local sem Docker
+
+```bash
+npm install
+npm start
+```
+
+A API sobe por padrão na porta `5000`.
+
+## Execução com Docker
+
+```bash
+docker compose up --build
+```
 
 ## Deploy
 
-Este repositório foi preparado para deploy no Render via GitHub Actions usando os secrets:
-- `RENDER_API_KEY`
-- `SERVICE_ID`
+O deploy real continua no Render. O workflow de release por tag usa o secret:
 
-O workflow é acionado exclusivamente por push de tags no formato `vX.Y.Z`.
+- `RENDER_DEPLOY_HOOK`
+
+## Evidências
+
+A pasta `media/` deve conter prints de:
+
+1. `/` funcionando no navegador com a API em container.
+2. `/v1` funcionando no navegador com data/hora.
+3. Painel `Events` do Render.
+4. Evidência da tag `v1.1.0`.
